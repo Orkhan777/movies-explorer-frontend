@@ -1,0 +1,39 @@
+.navigation__tab {
+  background-color: black;
+  display: flex;
+}
+
+.navigation__tab-links {
+  margin: 24px auto;
+}
+
+.navigation__tab-link {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  color: white;
+  margin: 0 20px;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.navigation__tab-link:hover {
+  transition: opacity 0.3s;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__tab-links {
+    margin: 24px auto;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .navigation__tab-links {
+    margin: 24px auto;
+  }
+  .navigation__tab-link {
+    font-size: 11px;
+    margin: 0 12px;
+  }
+}
