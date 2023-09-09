@@ -15,16 +15,18 @@ const Techs = () => {
   return (
     <section id="techs" className="techs">
       <Container titleText={"Технологии"}>
-        <h2 className="techs__title">7 технологий</h2>
+        <h3 className="techs__title">7 технологий</h3>
         <p className="techs__subtitle">
           На курсе веб-разработки мы освоили технологии, которые применили в
           дипломном проекте.
         </p>
-        <div className="techs__cards">
+        <ul className="techs__cards">
           {techsArray.map((tech, i) => (
-            <TechCard key={i} text={tech} />
+            <li key={i} className="techs__card">
+              <TechCard text={tech} />
+            </li>
           ))}
-        </div>
+        </ul>
       </Container>
     </section>
   );

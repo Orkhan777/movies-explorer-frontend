@@ -1,6 +1,6 @@
-.aboutMe {
+/* .aboutMe {
   margin-top: 11px;
-}
+} */
 .aboutMe__container {
   display: flex;
   justify-content: space-between;
@@ -94,7 +94,7 @@
   }
 }
 
-@media screen and (max-width: 435px) {
+@media screen and (max-width: 500px) {
   .aboutMe__container {
     margin: 0 -4px;
     flex-direction: column-reverse;

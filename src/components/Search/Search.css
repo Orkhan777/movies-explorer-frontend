@@ -156,7 +156,7 @@ input:checked + .search__slider:before {
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 500px) {
   .search__line {
     margin: 0 10px 0 10px;
   }
@@ -179,7 +179,8 @@ input:checked + .search__slider:before {
 
   .search__input-container {
     border: none;
-    width: 262px;
+    width: 260px;
+    margin: auto;
   }
 
   .search__input {

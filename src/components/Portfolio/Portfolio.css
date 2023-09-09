@@ -1,6 +1,6 @@
 .portfolio__container {
   max-width: 1140px;
-  padding: 0 70px 106px 70px;
+  padding: 0 70px 177px 70px;
   margin: auto;
 }
 
@@ -12,6 +12,15 @@
   line-height: 20px;
   margin: 0 0 30px 0;
   display: inline-block;
+}
+
+.portfolio__item {
+  list-style: none;
+}
+
+.portfolio__list {
+  margin: 0 auto;
+  padding: 0;
 }
 
 .portfolio__link {
@@ -69,5 +78,6 @@
     font-size: 18px;
     line-height: 28px;
     letter-spacing: -0.72px;
+    /* padding-bottom:  19px; */
   }
 }

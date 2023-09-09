@@ -18,7 +18,7 @@
   justify-content: space-between;
 }
 
-.header__right-container {
+.header__rightContainer {
   margin: auto 0;
   display: flex;
 }
@@ -59,7 +59,7 @@
   transition: opacity 0.3s;
 }
 
-.header__nav-link {
+.header__navLink {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -71,24 +71,24 @@
   transition: opacity 0.3s;
 }
 
-.header__nav-link:hover {
+.header__navLink:hover {
   opacity: 0.7;
   transition: opacity 0.3s;
 }
 
-.header__nav-link_bold {
+.header__navLink_bold {
   font-weight: 500;
 }
 
-.header__button-container {
+.header__buttonContainer {
   margin-left: 40px;
 }
 
-.header__nav-container {
+.header__navContainer {
   display: flex;
 }
 
-.header__burger-logo {
+.header__burgerLogo {
   width: 44px;
   height: 44px;
   padding: 0;
@@ -102,13 +102,13 @@
   .header__box {
     padding: 18px 30px;
   }
-  .header__nav-container {
+  .header__navContainer {
     display: none;
   }
-  .header__button-container {
+  .header__buttonContainer {
     display: none;
   }
-  .header__burger-logo {
+  .header__burgerLogo {
     display: block;
   }
 }
@@ -122,7 +122,7 @@
     margin-right: 14px;
   }
 
-  .header__right-container > a {
+  .header__rightContainer > a {
     font-size: 10px;
   }
 
@@ -130,7 +130,7 @@
     padding: 5px 12px;
   }
 
-  .header__burger-logo {
+  .header__burgerLogo {
     width: 37px;
     height: 37px;
   }

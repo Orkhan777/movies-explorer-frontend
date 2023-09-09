@@ -28,6 +28,8 @@
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 90px);
   gap: 10px;
+  list-style: none;
+  padding-left: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -66,5 +68,6 @@
   .techs__cards {
     margin-top: 50px;
     grid-template-columns: repeat(2, 84px);
+    padding: 0;
   }
 }

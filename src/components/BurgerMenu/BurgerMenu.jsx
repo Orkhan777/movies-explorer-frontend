@@ -8,13 +8,13 @@ const BurgerMenu = ({ closeMenu }) => {
   return (
     <div className="menu" onClick={hundleCloseMenu}>
       <div className="menu__container" onClick={(e) => e.stopPropagation()}>
-        <button className="menu__close-button" onClick={hundleCloseMenu} />
+        <button type="button" className="menu__closeBtn" onClick={hundleCloseMenu} />
         <div className="menu__content">
-          <nav className="menu__nav-container">
+          <nav className="menu__navContainer">
             <Link
               to="/"
-              className={`menu__nav-link ${
-                location.pathname === "/" && "menu__nav-link_active"
+              className={`menu__navLink ${
+                location.pathname === "/" && "menu__navLink_active"
               }`}
               onClick={hundleCloseMenu}
             >
@@ -22,8 +22,8 @@ const BurgerMenu = ({ closeMenu }) => {
             </Link>
             <Link
               to="/movies"
-              className={`menu__nav-link ${
-                location.pathname === "/movies" && "menu__nav-link_active"
+              className={`menu__navLink ${
+                location.pathname === "/movies" && "menu__navLink_active"
               }`}
               onClick={hundleCloseMenu}
             >
@@ -31,15 +31,15 @@ const BurgerMenu = ({ closeMenu }) => {
             </Link>
             <Link
               to="/saved-movies"
-              className={`menu__nav-link ${
-                location.pathname === "/saved-movies" && "menu__nav-link_active"
+              className={`menu__navLink ${
+                location.pathname === "/saved-movies" && "menu__navLink_active"
               }`}
               onClick={hundleCloseMenu}
             >
               Сохраненные фильмы
             </Link>
           </nav>
-          <div className="menu__button-container" onClick={hundleCloseMenu}>
+          <div className="menu__buttonContainer" onClick={hundleCloseMenu}>
             <ProfileButton />
           </div>
         </div>

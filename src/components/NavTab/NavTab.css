@@ -1,4 +1,4 @@
-.navigation__tab {
+.navigation {
   background-color: black;
   display: flex;
 }
@@ -30,7 +30,7 @@
 
 @media screen and (max-width: 425px) {
   .navigation__tab-links {
-    margin: 24px auto;
+    margin: 25px auto;
   }
   .navigation__tab-link {
     font-size: 11px;

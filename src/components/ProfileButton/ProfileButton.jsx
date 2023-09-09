@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
-import "./ProfileButton.css";
+import { Link, useLocation } from "react-router-dom"
+import './ProfileButton.css'
 
-function ProfileButton() {
+const ProfileButton = () => {
+  const location = useLocation();
   return (
-    <Link to="/profile" className="account">
+    <Link
+      to='/profile'
+      className={`account ${location.pathname === '/' ? 'account_darkTheme' : ''}`}
+    >
       Аккаунт
     </Link>
-  );
+  )
 }
 
-export default ProfileButton;
+export default ProfileButton

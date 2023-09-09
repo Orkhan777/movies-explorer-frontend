@@ -16,7 +16,7 @@ const Header = ({ loggedIn, menuActive }) => {
         <div className="header__box">
           <Logo />
           {!loggedIn ? (
-            <nav className="header__right-container">
+            <nav className="header__rightContainer">
               <Link to="/signup" className="header__reg">
                 Регистрация
               </Link>
@@ -26,19 +26,19 @@ const Header = ({ loggedIn, menuActive }) => {
             </nav>
           ) : (
             <>
-              <div className="header__right-container">
-                <nav className="header__nav-container">
+              <div className="header__rightContainer">
+                <nav className="header__navContainer">
                   <Link
                     to="/movies"
-                    className={`header__nav-link ${
-                      location.pathname === "/movies" && "header__nav-link_bold"
+                    className={`header__navLink ${
+                      location.pathname === "/movies" && "header__navLink_bold"
                     }`}
                   >
                     Фильмы
                   </Link>
                   <Link
                     to="/saved-movies"
-                    className={`header__nav-link ${
+                    className={`header__navLink ${
                       location.pathname === "/saved-movies" &&
                       "header__navLink_bold"
                     }`}
@@ -46,12 +46,13 @@ const Header = ({ loggedIn, menuActive }) => {
                     Сохраненные фильмы
                   </Link>
                 </nav>
-                <div className="header__button-container">
+                <div className="header__buttonContainer">
                   <ProfileButton />
                 </div>
                 <button
-                  className="header__burger-logo"
+                  className="header__burgerLogo"
                   onClick={hundleMenuActive}
+                  type="button"
                 />
               </div>
             </>

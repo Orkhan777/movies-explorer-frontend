@@ -12,9 +12,9 @@ const MoviesCard = ({ movie }) => {
           }`}
         />
       ) : (
-        <button className="moviesCard__save-btn">Сохранить</button>
+        <button type="button" className="moviesCard__save-btn">Сохранить</button>
       )}
-      <img src={movie.frame} alt="Обложка" className="moviesCard__frame" />
+      <img src={movie.frame} alt="Обложка фильма" className="moviesCard__frame" />
       <div className="moviesCard__description">
         <h2 className="moviesCard__name">{movie.name}</h2>
         <p className="moviesCard__duration">{movie.duration}</p>

@@ -38,36 +38,56 @@ const App = () => {
           menuActive={toggleMenuActive}
         />
       )}
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route
-          path="/movies"
-          element={
-            <ProtectedRouteElement loggedIn={loggedIn} element={Movies} />
-          }
-        />
-        <Route
-          path="/saved-movies"
-          element={
-            <ProtectedRouteElement loggedIn={loggedIn} element={SavedMovies} />
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRouteElement loggedIn={loggedIn} element={Profile} />
-          }
-        />
-        <Route
-          path="/signup"
-          element={<Auth type="register" onSubmit={handleRegister} />}
-        />
-        <Route
-          path="/signin"
-          element={<Auth type="login" onSubmit={handleLogin} />}
-        />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRouteElement loggedIn={loggedIn} element={Movies} />
+            }
+          />
+          <Route
+            path="/saved-movies"
+            element={
+              <ProtectedRouteElement
+                loggedIn={loggedIn}
+                element={SavedMovies}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRouteElement loggedIn={loggedIn} element={Profile} />
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <section>
+                <Auth type="register" onSubmit={handleRegister} />
+              </section>
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <section>
+                <Auth type="login" onSubmit={handleLogin} />
+              </section>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <section>
+                <PageNotFound />
+              </section>
+            }
+          />
+        </Routes>
+      </main>
       {footerLocation.find((i) => i === location.pathname) && <Footer />}
     </div>
   );
