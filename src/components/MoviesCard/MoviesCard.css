@@ -4,7 +4,7 @@
   position: relative;
 }
 
-.moviesCard:hover> .moviesCard__save-btn {
+.moviesCard:hover > .moviesCard__save-btn {
   opacity: 1;
   transition: opacity 0.4s;
 }
@@ -15,7 +15,7 @@
   opacity: 0;
   width: 72px;
   height: 21px;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   border-radius: 30px;
   position: absolute;
   font-size: 10px;
@@ -26,6 +26,11 @@
   top: 14px;
   right: 14px;
   transition: opacity 0.4s;
+}
+
+.moviesCard__link {
+  text-decoration: none;
+  color: black;
 }
 
 .moviesCard__saved {
@@ -43,7 +48,7 @@
 .moviesCard__saved_hidden {
   background: url(../../image/delete.svg) no-repeat center;
   opacity: 0;
-  transition: opacity 0.3s; 
+  transition: opacity 0.3s;
 }
 
 .moviesCard__saved:hover {
@@ -51,10 +56,10 @@
   transition: opacity 0.3s;
 }
 
-.moviesCard:hover> .moviesCard__saved {
+.moviesCard:hover > .moviesCard__saved {
   visibility: visible;
   background: url(../../image/delete.svg) no-repeat center;
-  transition: background 0.3s ;
+  transition: background 0.3s;
   opacity: 1;
 }
 
@@ -85,7 +90,7 @@
 
 .moviesCard__duration {
   margin: 0;
-  color: #A0A0A0;
+  color: #a0a0a0;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
@@ -96,7 +101,7 @@
   padding-top: 3px;
   border-radius: 3px;
   box-sizing: border-box;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   padding-top: 4px;
 }
 

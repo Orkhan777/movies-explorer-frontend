@@ -1,11 +1,31 @@
-import "./Search.css";
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import './Search.css';
 
-const Search = () => {
+const Search = ({ handleSearch, searchQuery, shortFilmsActive, handleShortFilms }) => {
+  const location = useLocation()
+  const [inputValue, setInputValue] = useState('');
+  const handleChange = (e) => setInputValue(e.target.value);
+  const handleShort = () => {
+    handleShortFilms(!shortFilmsActive)
+  }
+
+  const searchSubmit = (e) => {
+    e.preventDefault();
+    if(location.pathname === '/saved-movies') {
+      handleSearch(inputValue, shortFilmsActive);
+    }
+    if (inputValue.trim() !== '') {
+      handleSearch(inputValue, shortFilmsActive);
+    }
+  }
+
+
   return (
     <section className="search">
-      <form className="search__form">
+      <div className="search__form">
         <div className="search__container">
-          <div className="search__input-container">
+          <form className="search__input-container" onSubmit={searchSubmit}>
             <input
               type="text"
               className="search__input"
@@ -13,16 +33,18 @@ const Search = () => {
               required
               onFocus={(e) => (e.target.placeholder = "")}
               onBlur={(e) => (e.target.placeholder = "Фильм")}
+              onChange={handleChange}
+              value={inputValue}
             />
             <button  type="submit" className="search__button">Найти</button>
-          </div>
+          </form>
           <div className="search__switch-container">
             <label htmlFor="checkbox-switch" className="search__switch">
               <input
                 className="search__checkbox"
                 type="checkbox"
                 id="checkbox-switch"
-                defaultChecked
+                checked={shortFilmsActive} onChange={handleShort}
               />
               <span className="search__slider" />
             </label>
@@ -46,7 +68,7 @@ const Search = () => {
             Короткометражки
           </label>
         </div>
-      </form>
+      </div>
     </section>
   );
 };
