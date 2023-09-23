@@ -6,56 +6,56 @@ import { mainApi } from "../../utils/MainApi";
 const SavedMovies = () => {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [hideCard, setHideCard] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('');
-  const [shortActive, setShortActive] = useState(
-    JSON.parse(localStorage.getItem('shortActive')) === null
-      ? true
-      : JSON.parse(localStorage.getItem('shortActive'))
-  );
+  const [hideCard, setHideCard] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [shortActive, setShortActive] = useState(false);
 
   const handleSearch = (searchString) => setSearchQuery(searchString);
-  const handleShortFilms = () => setShortActive(!shortActive)
+  const handleShortFilms = () => setShortActive(!shortActive);
 
   const searchMovieFilter = (allMovies, searchQueryStr, shortActive) => {
-    const reg = new RegExp(`${searchQueryStr}`, 'i')
+    const reg = new RegExp(`${searchQueryStr}`, "i");
     let filteredMovies = allMovies.filter(function (movie) {
       return reg.test(movie.nameRU);
-    })
-    if (!shortActive) {
+    });
+    if (shortActive) {
       return filteredMovies.filter(function (movie) {
-        return movie.duration >= 40;
-      })
+        return movie.duration <= 40;
+      });
     }
     return filteredMovies;
-  }
+  };
 
   useEffect(() => {
-    localStorage.setItem('shortActive', shortActive)
-    mainApi.getMyMovies()
+    mainApi
+      .getMyMovies()
       .then((res) => {
-        setHideCard(false)
+        setHideCard(false);
         setLoading(true);
         setMovies(searchMovieFilter(res, searchQuery, shortActive));
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err)
-      })
-  }, [searchQuery, shortActive, hideCard])
+        console.log(err);
+      });
+  }, [searchQuery, shortActive, hideCard]);
 
   return (
-    <section className='savedMovies'>
+    <section className="savedMovies">
       <Search
         handleSearch={handleSearch}
         searchQuery={searchQuery}
         shortFilmsActive={shortActive}
         handleShortFilms={handleShortFilms}
       />
-      <MoviesCardList movies={movies} loading={loading} setHideCard={setHideCard}/>
+      <MoviesCardList
+        movies={movies}
+        loading={loading}
+        setHideCard={setHideCard}
+      />
     </section>
-  )
-}
+  );
+};
 
-export default SavedMovies
+export default SavedMovies;

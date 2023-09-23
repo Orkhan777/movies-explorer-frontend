@@ -1,27 +1,27 @@
-import { Link, useLocation } from 'react-router-dom';
-import './MoviesCard.css';
-import { mainApi } from '../../utils/MainApi';
-import { useEffect, useState } from 'react';
+import { Link, useLocation } from "react-router-dom";
+import "./MoviesCard.css";
+import { mainApi } from "../../utils/MainApi";
+import { useEffect, useState } from "react";
 
 const MoviesCard = ({ movie, myMovies, setHideCard }) => {
   const location = useLocation();
-  const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(true);
   const [id, setId] = useState(null);
 
   useEffect(() => {
-    const checkMovie = myMovies.find((e) => e.movieId === movie.id);
+    const checkMovie = myMovies.find((e) => e.nameRU === movie.nameRU);
     if (checkMovie) {
       setId(checkMovie._id);
       setSaved(true);
     } else {
-      setId(null);
       setSaved(false);
     }
-  }, [myMovies, movie.id]);
+  }, [myMovies, movie.nameRU]);
 
   const saveMovie = () => {
     if (!saved) {
-      mainApi.saveMovie(movie)
+      mainApi
+        .saveMovie(movie)
         .then((res) => {
           setId(res._id);
           setSaved(true);
@@ -32,9 +32,10 @@ const MoviesCard = ({ movie, myMovies, setHideCard }) => {
 
   const deleteMovie = () => {
     if (saved) {
-      mainApi.deleteMyMovie(id)
+      mainApi
+        .deleteMyMovie(id)
         .then(() => {
-          if (location.pathname !== '/movies') {
+          if (location.pathname !== "/movies") {
             setHideCard(true);
           }
           setSaved(false);
@@ -42,25 +43,27 @@ const MoviesCard = ({ movie, myMovies, setHideCard }) => {
         .catch((err) => console.log(err));
     }
   };
-
   return (
-    <article className='moviesCard'>
+    <article className="moviesCard">
       {saved ? (
         <button
-          className={`moviesCard__saved ${location.pathname !== '/movies' ? 'moviesCard__saved_hidden' : ''}`}
+          className={`moviesCard__saved ${
+            location.pathname !== "/movies" ? "moviesCard__saved_hidden" : ""
+          }`}
           onClick={deleteMovie}
         />
       ) : (
-        <button
-          className="moviesCard__save-btn"
-          onClick={saveMovie}
-        >
+        <button className="moviesCard__save-btn" onClick={saveMovie}>
           Сохранить
         </button>
       )}
-      <Link to={movie.trailerLink} className="moviesCard__link" target='_blank'>
+      <Link to={movie.trailerLink} className="moviesCard__link" target="blank">
         <img
-          src={`${location.pathname === '/movies' ? `https://api.nomoreparties.co${movie.image.url}` : movie.image}`}
+          src={`${
+            location.pathname === "/movies"
+              ? `https://api.nomoreparties.co/${movie.image.url}`
+              : movie.image
+          }`}
           alt="Обложка"
           className="moviesCard__frame"
         />

@@ -69,6 +69,18 @@
   transition: opacity 0.3s;
 }
 
+.auth__submit:disabled {
+  background-color: grey;
+  opacity: 0.5;
+}
+
+.auth__submit:disabled:hover {
+  opacity: 0.5;
+  cursor: default;
+  background-color: grey;
+}
+
+
 .auth__submit:hover {
   opacity: 0.8;
   transition: opacity 0.3s;

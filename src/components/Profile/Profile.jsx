@@ -4,32 +4,66 @@ import { useEffect, useState } from "react";
 import { mainApi } from "../../utils/MainApi";
 
 const Profile = ({ loggedIn, onExit }) => {
-  const [profileData, setProfileData] = useState({ name: '', email: '' });
+  const [profileData, setProfileData] = useState({ name: "", email: "" });
+  const [initialProfileData, setInitialProfileData] = useState({
+    name: "",
+    email: "",
+  });
   const [edit, setEdit] = useState(false);
+  const [error, setError] = useState("");
+  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     if (loggedIn) {
-      mainApi.getProfileInfo()
+      mainApi
+        .getProfileInfo()
         .then((userData) => {
-          console.log(userData);
+          setInitialProfileData(userData);
           setProfileData(userData);
         })
         .catch((err) => console.log(err));
     }
   }, [loggedIn]);
-  
 
-  const handleEdit = () => setEdit(!edit);
+  const handleEdit = () => {
+    setError("");
+    setEdit(!edit);
+  };
+
+  useEffect(() => {
+    if (initialProfileData !== profileData) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [initialProfileData, profileData]);
 
   const exit = () => onExit();
 
   const updateProfile = (e) => {
     e.preventDefault();
-    setEdit(!edit);
-    mainApi
-      .setProfileInfo(profileData)
-      .then((result) => setProfileData(result))
-      .catch((error) => console.error(error));
+    if (initialProfileData !== profileData) {
+      setDisabled(true);
+      mainApi
+        .setProfileInfo(profileData)
+        .then((result) => {
+          setInitialProfileData(result);
+          setProfileData(result);
+          setError("Успешно");
+          setTimeout(() => {
+            setEdit(!edit);
+            setDisabled(true);
+          }, 1000);
+        })
+        .catch((err) => {
+          setDisabled(false);
+          if (err === "Ошибка: 400") {
+            setError("Некорректные данные");
+          }
+        });
+    } else {
+      setDisabled(false);
+    }
   };
 
   return (
@@ -72,15 +106,45 @@ const Profile = ({ loggedIn, onExit }) => {
           </div>
           {edit ? (
             <div className="profile__editContainer">
-              <span className="profile__error"></span>
-              <button type="submit" className="profile__save">
+              <span
+                className="profile__error"
+                style={
+                  error === "Успешно"
+                    ? {
+                        color: "green",
+                        fontSize: 30,
+                        marginBottom: "20px",
+                        marginTop: "-20px",
+                      }
+                    : {}
+                }
+              >
+                {error}
+              </span>
+              <button
+                className="profile__save"
+                type="submit"
+                disabled={disabled}
+              >
                 Сохранить
               </button>
             </div>
           ) : (
             <div className="profile__edit">
-              <button className="profile__link profile__link_submit" type="button" onClick={handleEdit}>Редактировать</button>
-              <Link className="profile__link profile__link_logout" to={"/"} onClick={exit}>Выйти из аккаунта</Link>
+              <button
+                className="profile__link profile__link_submit"
+                type="button"
+                onClick={handleEdit}
+              >
+                Редактировать
+              </button>
+              <Link
+                className="profile__link profile__link_logout"
+                to={"/"}
+                onClick={exit}
+              >
+                Выйти из аккаунта
+              </Link>
             </div>
           )}
         </form>

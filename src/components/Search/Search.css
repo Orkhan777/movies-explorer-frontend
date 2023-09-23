@@ -2,6 +2,7 @@
   max-width: 1280px;
   margin: auto;
   box-sizing: border-box;
+  position: relative;
 }
 
 .search__container {
@@ -96,6 +97,14 @@
   overflow: hidden;
 }
 
+.search__error {
+  color: red;
+  font-size: 11px;
+  position: absolute;
+  top: 75px;
+  left: 72px;
+}
+
 .search__slider:before {
   border-radius: 50%;
   position: absolute;
@@ -154,6 +163,11 @@ input:checked + .search__slider:before {
   .search__input {
     padding-left: 15px;
   }
+
+  .search__error {
+    top: 80px;
+    left: 30px;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -198,5 +212,10 @@ input:checked + .search__slider:before {
   .search__switchName {
     font-size: 11px;
     line-height: 18px;
+  }
+
+  .search__error {
+    top: 80px;
+    left: 13px;
   }
 }

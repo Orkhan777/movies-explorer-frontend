@@ -55,14 +55,14 @@
   opacity: 0.8;
   transition: opacity 0.3s;
 }
-
+/*
 .moviesCard:hover > .moviesCard__saved {
   visibility: visible;
   background: url(../../image/delete.svg) no-repeat center;
   transition: background 0.3s;
   opacity: 1;
 }
-
+*/
 .moviesCard__frame {
   width: 360px;
   height: 201px;
