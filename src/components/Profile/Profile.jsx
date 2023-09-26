@@ -31,7 +31,7 @@ const Profile = ({ loggedIn, onExit }) => {
   };
 
   useEffect(() => {
-    if (initialProfileData !== profileData) {
+    if (JSON.stringify(initialProfileData) !== JSON.stringify(profileData)) {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -42,7 +42,7 @@ const Profile = ({ loggedIn, onExit }) => {
 
   const updateProfile = (e) => {
     e.preventDefault();
-    if (initialProfileData !== profileData) {
+    if (JSON.stringify(initialProfileData) !== JSON.stringify(profileData)) {
       setDisabled(true);
       mainApi
         .setProfileInfo(profileData)

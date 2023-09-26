@@ -1,21 +1,15 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import "./Search.css";
+import { useState } from 'react';
+import './Search.css';
+import { useLocation } from 'react-router-dom';
 
-const Search = ({
-  handleSearch,
-  searchQuery,
-  shortFilmsActive,
-  handleShortFilms,
-}) => {
-  const location = useLocation();
-  const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState("");
-
+const Search = ({ handleSearch, searchQuery, shortFilmsActive, handleShortFilms }) => {
+  const location = useLocation()
+  const [inputValue, setInputValue] = useState(searchQuery === null ? '' : searchQuery);
   const handleChange = (e) => setInputValue(e.target.value);
+  const [error, setError] = useState("");
   const handleShort = () => {
-    handleShortFilms(!shortFilmsActive);
-  };
+    handleShortFilms()
+  }
 
   const searchSubmit = (e) => {
     e.preventDefault();

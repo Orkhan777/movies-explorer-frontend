@@ -36,25 +36,29 @@ const App = () => {
           setCurrentUser(res);
           setLoggedIn(true);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          mainApi.logout();
+          setLoggedIn(false);
+          console.log(err);
+        });
     } else {
       setLoggedIn(false);
     }
   }, [navigate]);
 
   const handleRegister = (data) => {
-    setDisabled(true)
+    setDisabled(true);
     const { name, email, password } = data;
-  
+
     mainApi
       .register(name, email, password)
       .then(() => {
         setDisabled(true);
         handleLogin({ email, password });
-        setDisabled(false)
+        setDisabled(false);
       })
       .catch((error) => {
-        setDisabled(false)
+        setDisabled(false);
         if (error === "Ошибка: 400") {
           setError("Некорректные данные");
         } else if (error === "Ошибка: 409") {
@@ -63,22 +67,22 @@ const App = () => {
           setError(error);
         }
       });
-  };  
+  };
 
   const handleLogin = (data) => {
-    setDisabled(true)
+    setDisabled(true);
     const { email, password } = data;
     mainApi
       .login(email, password)
       .then((res) => {
-        setDisabled(true)
+        setDisabled(true);
         setLoggedIn(true);
         localStorage.setItem("jwt", res.token);
         navigate("/movies", { replace: true });
-        setDisabled(false)
+        setDisabled(false);
       })
       .catch((error) => {
-        setDisabled(false)
+        setDisabled(false);
         if (error === "Ошибка: 400") {
           setError("Некорректные данные");
         } else {
@@ -89,49 +93,67 @@ const App = () => {
 
   const handleSignout = () => {
     setLoggedIn(false);
+    mainApi.logout();
     localStorage.clear();
   };
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, error, setError, disabled, setDisabled }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, error, setError, disabled, setDisabled }}
+    >
       <div className="App">
         {menuActive && <BurgerMenu closeMenu={toggleMenuActive} />}
-        {headerLocation.find((i) => i === location.pathname) &&
-          <Header loggedIn={loggedIn} bgColor={'white'} menuActive={toggleMenuActive} />}
+        {headerLocation.find((i) => i === location.pathname) && (
+          <Header loggedIn={loggedIn} bgColor={"white"} menuActive={toggleMenuActive} />
+        )}
         <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/movies' element={
-            <ProtectedRouteElement loggedIn={loggedIn}>
-              <Movies />
-            </ProtectedRouteElement>
-          } />
-          <Route path='/saved-movies' element={
-            <ProtectedRouteElement loggedIn={loggedIn}>
-              <SavedMovies />
-            </ProtectedRouteElement>
-          } />
-          <Route path='/profile' element={
-            <ProtectedRouteElement loggedIn={loggedIn}>
-              <Profile loggedIn={loggedIn} onExit={handleSignout}/>
-            </ProtectedRouteElement>
-          } />
-          <Route path='/signup' element={
-            <ProtectedRouteElement loggedIn={!loggedIn}>
-              <Auth type='register' onSubmit={handleRegister} />
-            </ProtectedRouteElement>
-          } />
-          <Route path='/signin' element={
-            <ProtectedRouteElement loggedIn={!loggedIn}>
-              <Auth type='login' onSubmit={handleLogin} />
-            </ProtectedRouteElement>
-          } />
+          <Route path="/" element={<Main />} />
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRouteElement loggedIn={loggedIn}>
+                <Movies />
+              </ProtectedRouteElement>
+            }
+          />
+          <Route
+            path="/saved-movies"
+            element={
+              <ProtectedRouteElement loggedIn={loggedIn}>
+                <SavedMovies />
+              </ProtectedRouteElement>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRouteElement loggedIn={loggedIn}>
+                <Profile loggedIn={loggedIn} onExit={handleSignout} />
+              </ProtectedRouteElement>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <ProtectedRouteElement loggedIn={!loggedIn}>
+                <Auth type="register" onSubmit={handleRegister} />
+              </ProtectedRouteElement>
+            }
+          />
+          <Route
+            path="/signin"
+            element={
+              <ProtectedRouteElement loggedIn={!loggedIn}>
+                <Auth type="login" onSubmit={handleLogin} />
+              </ProtectedRouteElement>
+            }
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-        {footerLocation.find((i) => i === location.pathname) &&
-          <Footer />}
+        {footerLocation.find((i) => i === location.pathname) && <Footer />}
       </div>
     </CurrentUserContext.Provider>
   );
-}
+};
 
 export default App;

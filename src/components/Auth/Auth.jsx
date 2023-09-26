@@ -37,7 +37,11 @@ const Auth = ({ type, onSubmit }) => {
 
   useEffect(() => {
     setDisabled(!isValid);
-  }, [isValid, setDisabled]);
+
+    return () => {
+      setError("");
+    };
+  }, [isValid, setDisabled, setError]);
 
   const formSubmit = (data) => {
     onSubmit(data);
